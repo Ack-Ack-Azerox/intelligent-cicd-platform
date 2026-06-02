@@ -1,0 +1,31 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+
+  build:
+    commands:
+      - npm install
+
+  post_build:
+    commands:
+      - echo Deploying to EC2
+
+      - zip -r app.zip .
+
+      - scp -o StrictHostKeyChecking=no -i mykey.pem app.zip ubuntu@EC2_IP:/home/ubuntu/
+
+      - ssh -o StrictHostKeyChecking=no -i mykey.pem ubuntu@EC2_IP "
+          cd /home/ubuntu &&
+          unzip -o app.zip -d app &&
+          cd app &&
+          chmod +x scripts/*.sh &&
+          bash scripts/deploy.sh &&
+          bash scripts/healthcheck.sh
+        "
+
+artifacts:
+  files:
+    - '**/*'
