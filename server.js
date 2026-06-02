@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-    res.send('CI/CD App Running');
+    
+    res.send("Version 2 deployed successfully 🚀");
 });
 
 app.get('/health', (req, res) => {
