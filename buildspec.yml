@@ -5,7 +5,8 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      - npm install
+      - echo Installing dependencies
+      - npm install express
 
   build:
     commands:
