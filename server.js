@@ -6,12 +6,14 @@ app.get('/', (req, res) => {
     res.send("Version 2 deployed successfully 🚀");
 });
 
+// test failure here
+const x = ;
+
 app.get('/health', (req, res) => {
     res.status(200).send('Healthy');
 });
 
-// test failure here
-const x = ;
+
 
 app.listen(3000, () => {
     console.log('Server running');
